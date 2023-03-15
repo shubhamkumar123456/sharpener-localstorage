@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+    <style>
+        body{
+            background: rgba(240, 183, 48, 0.872);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+           background-color:olivedrab;
+           display: flex;
+           flex-direction: column;
+           padding: 1rem;
+           border-radius: 2rem;
+        }
+        label{
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        input{
+            margin-bottom: 1rem;
+            height: 2rem;
+            width: 800px;
+            font-size: 1rem;
+        }
+        button{
+            width: 100px;
+            height: 2rem;
+            margin: auto;
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: none;
+        }
+        button:hover{
+            background-color: rgb(146, 239, 146);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sign up</h1>
+    <form >
+        <label for="name">Name:</label>
+        <input type="text" placeholder="enter your name" id="name" name="name">
+        <label for="email">Email:</label>
+        <input type="email" placeholder="enter your email" id="email" name="email">
+        <label for="number">Phone:</label>
+        <input type="number" placeholder="enter your phone number" id="phone" name="phone">
+        <label for="password">Password</label>
+        <input type="password" placeholder="enter your password" id="password" name="password">
+       <button id="submit">submit</button>
+    </form>
+    <script>
+        const submit=document.getElementById("submit");
+       const name=document.getElementById("name");
+       const password=document.getElementById("password");
+       const email=document.getElementById("email");
+       const phone=document.getElementById("phone");
+        submit.onclick=(e)=>{
+            e.preventDefault();
+            console.log({
+                name:name.value,
+                email:email.value,
+                phone:phone.value,
+                password:password.value
+            });
+            let setname=name.value;
+            let setpassword=password.value;
+            let setemail=email.value;
+            let setphone=phone.value;
+            // console.log(setname,setpassword,setemail,setphone)
+            localStorage.setItem('name',setname);
+            localStorage.setItem('email',setemail);
+            localStorage.setItem('phone',setphone);
+            localStorage.setItem('password',setpassword);
+            console.log(localStorage.getItem('name'))
+            console.log(localStorage.getItem('email'))
+            console.log(localStorage.getItem('phone'))
+            console.log(localStorage.getItem('password'))
+            makeblank();
+        
+        }
+        const makeblank = () =>{
+                name.value="";
+                email.value="";
+                phone.value="";
+                password.value="";
+        }
+   
+
+    </script>
+</body>
+</html>
