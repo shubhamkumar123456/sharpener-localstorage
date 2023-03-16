@@ -72,29 +72,32 @@
                 phone:phone.value,
                 password:password.value
             });
-            let setname=name.value;
-            let setpassword=password.value;
-            let setemail=email.value;
-            let setphone=phone.value;
+            // let setname=name.value;
+            // let setpassword=password.value;
+            // let setemail=email.value;
+            // let setphone=phone.value;
             // console.log(setname,setpassword,setemail,setphone)
-            localStorage.setItem('name',setname);
-            localStorage.setItem('email',setemail);
-            localStorage.setItem('phone',setphone);
-            localStorage.setItem('password',setpassword);
-            console.log(localStorage.getItem('name'))
-            console.log(localStorage.getItem('email'))
-            console.log(localStorage.getItem('phone'))
-            console.log(localStorage.getItem('password'))
+            // localStorage.setItem('name',setname);
+            // localStorage.setItem('email',setemail);
+            // localStorage.setItem('phone',setphone);
+            // localStorage.setItem('password',setpassword);
+            // console.log(localStorage.getItem('name'))
+            // console.log(localStorage.getItem('email'))
+            // console.log(localStorage.getItem('phone'))
+            // console.log(localStorage.getItem('password'))
             let obj={
                 name:name.value,
                 email:email.value,
                 phone:phone.value,
                 password:password.value
             }
-            let json=JSON.stringify(obj);
-            localStorage.setItem("obj",json);
-            let parsedData=JSON.parse(localStorage.getItem("obj"));
-            console.log("data save in local storage is ",parsedData);
+            localStorage.setItem(obj.email, JSON.stringify(obj));
+           
+            console.log("data save in local storage is ",obj);
+            // let json=JSON.stringify(obj);
+            // localStorage.setItem("obj",json);
+            // let parsedData=JSON.parse(localStorage.getItem("obj"));
+            // console.log("data save in local storage is ",parsedData);
             makeblank();
             
         
