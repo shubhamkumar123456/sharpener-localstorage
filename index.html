@@ -43,6 +43,21 @@
             background-color: rgb(146, 239, 146);
             cursor: pointer;
         }
+        ul{
+            display: flex;
+            flex-direction: column;
+        }
+        li{
+            display: flex;
+        }
+        .deleteUser{
+            width: 100px;
+            height: 1rem;
+            margin-left: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -58,49 +73,53 @@
         <input type="password" placeholder="enter your password" id="password" name="password">
        <button id="submit">submit</button>
     </form>
+    <ul id="items">
+        <li class="list-group-item"></li>
+    </ul>
     <script>
         const submit=document.getElementById("submit");
        const name=document.getElementById("name");
        const password=document.getElementById("password");
        const email=document.getElementById("email");
        const phone=document.getElementById("phone");
+       var users = document.getElementsByTagName("span");
+       let itemList= document.getElementById("items");
         submit.onclick=(e)=>{
             e.preventDefault();
-            console.log({
-                name:name.value,
-                email:email.value,
-                phone:phone.value,
-                password:password.value
-            });
-            // let setname=name.value;
-            // let setpassword=password.value;
-            // let setemail=email.value;
-            // let setphone=phone.value;
-            // console.log(setname,setpassword,setemail,setphone)
-            // localStorage.setItem('name',setname);
-            // localStorage.setItem('email',setemail);
-            // localStorage.setItem('phone',setphone);
-            // localStorage.setItem('password',setpassword);
-            // console.log(localStorage.getItem('name'))
-            // console.log(localStorage.getItem('email'))
-            // console.log(localStorage.getItem('phone'))
-            // console.log(localStorage.getItem('password'))
             let obj={
                 name:name.value,
                 email:email.value,
                 phone:phone.value,
                 password:password.value
             }
+            // let data=JSON.stringify(obj)
+            // console.log(data)
+            var newItem=obj.name+","+obj.email+","+obj.phone+","+obj.password
+          var li=document.createElement('li');
+          var delbtn=document.createElement('button');
+          delbtn.textContent="delete"
+          delbtn.className="deleteUser"
+          li.className = "list-group-item";
+          li.appendChild(document.createTextNode(newItem));
+          li.appendChild(delbtn);
+          itemList.appendChild(li);
             localStorage.setItem(obj.email, JSON.stringify(obj));
-           
             console.log("data save in local storage is ",obj);
-            // let json=JSON.stringify(obj);
-            // localStorage.setItem("obj",json);
-            // let parsedData=JSON.parse(localStorage.getItem("obj"));
-            // console.log("data save in local storage is ",parsedData);
             makeblank();
-            
-        
+            delbtn.onclick=(e)=>{
+                e.preventDefault();
+            console.log(e.target.parentNode)
+            let id=(e.target.parentNode.textContent);
+            let split=id.split(',')
+            let mainid=(split[1])
+            console.log(id);
+            console.log(mainid);
+            // console.log(id)
+            // localStorage.removeItem()
+            e.target.parentNode.remove()
+            localStorage.removeItem(mainid)
+            localStorage.removeItem("mainid")
+        }
         }
         const makeblank = () =>{
                 name.value="";
@@ -108,6 +127,7 @@
                 phone.value="";
                 password.value="";
         }
+        
    
 
     </script>
