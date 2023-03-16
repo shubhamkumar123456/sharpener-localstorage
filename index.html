@@ -94,19 +94,25 @@
             }
             // let data=JSON.stringify(obj)
             // console.log(data)
-            var newItem=obj.name+","+obj.email+","+obj.phone+","+obj.password
+            var newItem=obj.name+","+obj.email+","+obj.phone+","+obj.password+" ";
           var li=document.createElement('li');
           var delbtn=document.createElement('button');
+          var editbtn=document.createElement('button');
+          editbtn.textContent="Edit"
           delbtn.textContent="delete"
           delbtn.className="deleteUser"
+          editbtn.className="deleteUser"
           li.className = "list-group-item";
           li.appendChild(document.createTextNode(newItem));
           li.appendChild(delbtn);
+          li.appendChild(editbtn);
           itemList.appendChild(li);
             localStorage.setItem(obj.email, JSON.stringify(obj));
             console.log("data save in local storage is ",obj);
             makeblank();
-            delbtn.onclick=(e)=>{
+            delbtn.addEventListener("click",delDetails)
+
+            function delDetails(e){
                 e.preventDefault();
             console.log(e.target.parentNode)
             let id=(e.target.parentNode.textContent);
@@ -119,6 +125,19 @@
             e.target.parentNode.remove()
             localStorage.removeItem(mainid)
             localStorage.removeItem("mainid")
+        }
+        editbtn.onclick=(e)=>{
+            console.log(e.target.parentNode)
+            let id=(e.target.parentNode.textContent);
+            console.log("editted id",id)
+            let split=id.split(',')
+                name.value=split[0];
+                email.value=split[1];
+                phone.value=split[2];;
+                password.value=split[3].split(' ')[0];
+                console.log(split)
+                delDetails(e);
+           
         }
         }
         const makeblank = () =>{
